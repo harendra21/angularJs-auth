@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{ userFullName }}</h3>
+</div>
+<div class="modal-body aside-body">
+  <ul>
+    <li>
+      <a href ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed"> <i class="ion-android-cart sidebar-icon"></i> Ecommerce</a> <span class="pull-right ion-chevron-down"></span>
+      <ul uib-collapse="isCollapsed" class="collapsible-body">
+        <li><a href ng-init="isCollapsed2 = true" ng-click="isCollapsed2 = !isCollapsed2">Product</a> <span class="pull-right ion-chevron-down"></span>
+          <ul uib-collapse="isCollapsed2" class="collapsible-body">
+            <li><a href="#">View Product</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href ng-init="isCollapsed21 = true" ng-click="isCollapsed21 = !isCollapsed21"> <i class="ion-android-cart sidebar-icon"></i> History</a> <span class="pull-right ion-chevron-down"></span>
+      <ul uib-collapse="isCollapsed21" class="collapsible-body">
+        <li><a href="#!/history/front-history">Front History</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <!-- <button class="btn btn-primary" ng-click="ok($event)">OK</button>
+  <button class="btn btn-warning" ng-click="cancel($event)">Cancel</button> -->
+</div>

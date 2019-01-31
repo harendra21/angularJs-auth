@@ -1,0 +1,79 @@
+<div class="container-fluid" data-ng-init="getFrontHistory()">
+    <section id="main-content" class="animated fadeInRight">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Front History</h3>
+                  </div>
+                  <div class="panel-body">
+                    <!-- TOP OF TABLE: shows page size and search box -->
+                    <div class="form-inline">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div id="example_length">
+                                    <label>Records Perpage : </label>
+                                    <select name="example_length" aria-controls="example" class="form-control" ng-model="pageSize" ng-change="pageSizeChanged()">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                
+                                <label>Country Name : <input type="search" class="form-control" aria-controls="example" ng-model="searchText" ng-blur="searchTextChanged()"></label>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <!-- DATA TABLE: shows the results -->
+                        <!-- <table id="example" class="table table-striped table-bordered" datatable="" cellspacing="0" width="100%"> -->
+                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>URL</th>
+                                    <th>City</th>
+                                    <th>Country</th>
+                                    <th>Reffer URL</th>
+                                    <th>IP Address</th>
+                                    <th>Broswer</th>
+                                    <th>Operating System</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+            
+                            <tbody>
+                                <tr ng-repeat = "x in activity">
+                                    <td><a href="{{x.url}}" uib-tooltip="{{x.url}}" target="_blank">{{x.url | limitTo : 60 : 0}}</a></td>
+                                    <td>{{x.city}}</td>
+                                    <td>{{x.country}} ( {{x.countrycode}} ) </td>
+                                    <td>{{x.reffer_url | limitTo : 50 : 0}}</td>
+                                    <td>{{x.ip}}</td>
+                                    <td>{{x.broswer}}</td>
+                                    <td>{{x.os}}</td>
+                                    <td>{{x.created_at}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    
+                    <!-- BOTTOM OF TABLE: shows record number and pagination control -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel-body" role="alert" aria-live="polite" aria-relevant="all"><i>Showing <b>{{startItem}}</b> to <b>{{endItem}}</b> of <b>{{totalItems}}</b> entries</i></div>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                                <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="6" class="pagination" boundary-links="true"></ul>
+                        </div>
+                    </div>                      
+                  
+                  </div>
+                </div>
+            </div>
+        </div>
+     </section>
+</div>

@@ -1,0 +1,29 @@
+<div class="row" style="margin-top: 100px;">
+  <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
+    <div class="box-header">
+      <span class="box-title">Login</span>
+    </div>
+    <div class="box-content">
+      <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+      <form class="form-group">
+          <div class="form-group">
+              <label for="loginEmail">Email : </label>
+              <input type="text" ng-model="login.email" class="form-control" placeholder="Please enter registed email">
+          </div>
+          <div class="form-group">
+              <label for="loginPassword">Password : </label>
+              <input type="password" ng-model="login.password" class="form-control" placeholder="********">
+          </div>
+          <div class="form-group">
+              <button class="btn btn-block btn-primary" ng-click="userLogin(login)">Login</button>
+          </div>
+      </form>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <div><b>OR</b></div>
+          <div>Don't have an account  <a href="#!/register">Click Here</a> to register</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
