@@ -10,18 +10,16 @@ app.service('historyService',function($location,$rootScope,$http){
                 that.isLoggedInRoute();
             }else if(response.data.status == 'success'){
                 var history = response.data.data;
-                
                 scope.activity = history.history;
                 //scope.activity = [];
                 scope.totalItems = history.count;
                 scope.startItem = (currentPage - 1) * pageSize + 1;
                 scope.endItem = currentPage * pageSize;
-                if (endItem > totalCount) {endItem = totalCount;}
+                if (endItem > scope.totalItems) {endItem = scope.totalItems;}
                 // angular.forEach(history.history, function(temp){
                 //     scope.activity.push(temp);
                 // });
-                
-                
+  
             }
         });
     }

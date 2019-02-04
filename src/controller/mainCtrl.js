@@ -4,8 +4,6 @@ app.controller('mainCtrl',function($scope,$rootScope,authService,$http,$aside){
     $http.defaults.headers.common["Authorization"] = "Token "+sessionStorage.loggedInToken;
 
     authService.isLoggedIn();
-    $scope.showLoader = false;
-    
     $scope.showAlert = function(type,message){
 
         if(type === 'error')
@@ -63,10 +61,4 @@ app.controller('mainCtrl',function($scope,$rootScope,authService,$http,$aside){
           }
         }).result.then(postClose, postClose);
     };
-    $rootScope.$on('loading:progress', function (){
-        $scope.showLoader = true;
-    });
-    $rootScope.$on('loading:finish', function (){
-        $scope.showLoader = false;
-    });
 });

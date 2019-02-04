@@ -67,7 +67,7 @@
                             <div class="panel-body" role="alert" aria-live="polite" aria-relevant="all"><i>Showing <b>{{startItem}}</b> to <b>{{endItem}}</b> of <b>{{totalItems}}</b> entries</i></div>
                         </div>
                         <div class="col-sm-6 text-right">
-                                <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="6" class="pagination" boundary-links="true"></ul>
+                            <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="10" class="pagination" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
                         </div>
                     </div>                      
                   
