@@ -1,19 +1,15 @@
 app.service('historyService',function($location,$rootScope,$http){
     var that = this;
     this.getFrontHistory = function(currentPage,pageSize,searchText,scope){
-        
         $http({
             url: baseUrl+'history/getFrontHistory?page=' + currentPage + '&size=' + pageSize + '&search=' + searchText,
             method: "GET"
         })
         .then(function(response) {
-            
             if(response.data.status === 'invalid'){
                 that.logOut();
             }else if(response.data.status === 'success'){
-                
                 var history = response.data.data;
-                
                 scope.activity = history.history;
                 scope.totalItems = history.count;
                 scope.startItem = (currentPage - 1) * pageSize + 1;

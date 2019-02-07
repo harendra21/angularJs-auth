@@ -1,4 +1,4 @@
-var app = angular.module('mainApp',['ngRoute','ngAnimate','ngAria','ui.bootstrap','oc.lazyLoad','angular-loading-bar','asideModule']);
+var app = angular.module('mainApp',['ngRoute','ngAnimate','ngAria','ngSanitize','ui.bootstrap','oc.lazyLoad','angular-loading-bar','asideModule']);
 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;

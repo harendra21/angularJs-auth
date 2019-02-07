@@ -15,7 +15,4 @@ app.service('mainService',function($location,$rootScope,$http){
             }
         });
     }
-    
-    
-
 });

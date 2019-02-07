@@ -19,7 +19,7 @@ class HistoryCtrl extends CI_Controller {
 			$resp = array('error' => true,'status' => 'invalid', 'msg' => 'You are not logged in','data' => '');
 			jsonResp($resp);
 		}else{
-			$page 			= $_GET['page'];
+			$page 			= $_GET['page']-1;
 			$perPage 		= $_GET['size'];
 			$searchText 	= $_GET['search'];
 			$offset 		= $page*$perPage;

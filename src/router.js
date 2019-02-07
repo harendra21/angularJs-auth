@@ -15,6 +15,20 @@ app.config(function($routeProvider,$controllerProvider) {
       controller : 'homeCtrl',
       templateUrl : "view/home.html"
         
+    }).when("/category", {
+      resolve: {
+        lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            files: ['src/controller/categoryCtrl.js']
+          }]);
+        }],
+        check : function(authService){
+          authService.isLoggedInRoute();
+        } 
+      },
+      controller : 'categoryCtrl',
+      templateUrl : "view/web/category.html"
+        
     }).when("/my-profile", {
       resolve: {
         lazy: ['$ocLazyLoad', function($ocLazyLoad) {

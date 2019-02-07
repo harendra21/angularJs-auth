@@ -15,3 +15,7 @@ $route['history/getFrontHistory'] = 'history/HistoryCtrl/getFrontHistory';
 $route['fileupload'] = 'HomeCtrl/fileUpload';
 
 $route['profile/updateProfile'] = 'profile/profileCtrl/updateProfile';
+
+$route['send-sms'] = 'profile/profileCtrl/send_sms';
+
+$route['category/get-category'] = 'category/categoryCtrl/getCategory';

@@ -31,16 +31,16 @@ app.controller('mainCtrl',function($scope,$rootScope,authService,$http){
     $scope.loadScript = function(path){
         $ocLazyLoad.load(path)
     }
+
+
     $scope.menus = [
         { 'name' : 'Dashboard', 'url' : '#!/', 'icon' : 'ion-ionic', 'child' : '' },
         { 'name' : 'History', 'url' : '','icon' : 'ion-calendar', 'child' : [
             { 'name' : 'Front History', 'url' : '#!/history/front-history' },
             { 'name' : 'Admin History', 'url' : '#!/history/admin-history' }
-        ]}
+        ]},
+        { 'name' : 'Category','url' : '#!/category' , 'icon' : 'ion-ionic' ,'child' : ''}
     ];
-
-    console.log($scope.menus);
-
 
     // $scope.asideState = {
     //     open: false
@@ -72,6 +72,7 @@ app.controller('mainCtrl',function($scope,$rootScope,authService,$http){
     //       }
     //     }).result.then(postClose, postClose);
     // };
+    
     $rootScope.$on('loading:progress', function (){
         // show loading gif
         $scope.tblLoading = true;

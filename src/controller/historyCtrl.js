@@ -1,7 +1,5 @@
 app.controller('historyCtrl',['$scope','$rootScope','historyService',function($scope,$rootScope,historyService){
-
-    
-
+    $scope.activity = []; 
     $scope.currentPage = 1;
     $scope.totalItems = 0;
     $scope.pageSize = 10;
@@ -13,7 +11,6 @@ app.controller('historyCtrl',['$scope','$rootScope','historyService',function($s
         $scope.getFrontHistory();
     }
     $scope.pageSizeChanged = function() {
-        
         $scope.currentPage = 1;
         $scope.getFrontHistory();
     }

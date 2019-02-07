@@ -1,8 +1,8 @@
-<div class="container-fluid" data-ng-init="getFrontHistory()">
-    <section id="main-content" class="animated fadeInRight">
+<div class="container-fluid animated fadeInRight" data-ng-init="getFrontHistory()">
+    <section id="main-content">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                   <div class="panel-heading">
                     <h3 class="panel-title">Front History</h3>
                   </div>
@@ -65,14 +65,13 @@
                             </tbody>
                         </table>
                     </div>
-    
                     <!-- BOTTOM OF TABLE: shows record number and pagination control -->
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="panel-body" role="alert" aria-live="polite" aria-relevant="all"><i>Showing <b>{{startItem}}</b> to <b>{{endItem}}</b> of <b>{{totalItems}}</b> entries</i></div>
                         </div>
                         <div class="col-sm-6 text-right">
-                            <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="10" class="pagination-sm" boundary-links="true" rotate="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                            <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="10" class="pagination-sm" boundary-links="true"  boundary-link-numbers="true" rotate="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
                                 
                         </div>
                     </div>                      

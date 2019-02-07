@@ -31,6 +31,12 @@ class ProfileCtrl extends CI_Controller {
 			}
 		}
 	}
+
+	public function send_sms(){
+		$this->load->helper('sendsms');
+		$resp = send_sms();
+		print_r($resp);
+	}
 }
 /* End of file profileCtrl.php */
 /* Location: ./application/controllers/profile/profileCtrl.php */
