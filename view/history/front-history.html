@@ -30,6 +30,7 @@
                     </div>
                     
                     <div class="table-responsive">
+                        
                         <!-- DATA TABLE: shows the results -->
                         <!-- <table id="example" class="table table-striped table-bordered" datatable="" cellspacing="0" width="100%"> -->
                         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -45,16 +46,20 @@
                                     <th>Date</th>
                                 </tr>
                             </thead>
-            
                             <tbody>
-                                <tr ng-repeat = "x in activity">
+                                <tr ng-show="tblLoading">
+                                    <td colspan="8" class="text-center">
+                                        <span class="ion-refreshing tbl-loding"></span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="!tblLoading" ng-repeat = "x in activity">
                                     <td><a href="{{x.url}}" uib-tooltip="{{x.url}}" target="_blank">{{x.url | limitTo : 60 : 0}}</a></td>
                                     <td>{{x.city}}</td>
                                     <td>{{x.country}} ( {{x.countrycode}} ) </td>
                                     <td>{{x.reffer_url | limitTo : 50 : 0}}</td>
                                     <td>{{x.ip}}</td>
-                                    <td>{{x.broswer}}</td>
-                                    <td>{{x.os}}</td>
+                                    <td>{{x.broswer.substring(0, 20)}}</td>
+                                    <td>{{x.os.substring(0, 20)}}</td>
                                     <td>{{x.created_at}}</td>
                                 </tr>
                             </tbody>
@@ -67,7 +72,8 @@
                             <div class="panel-body" role="alert" aria-live="polite" aria-relevant="all"><i>Showing <b>{{startItem}}</b> to <b>{{endItem}}</b> of <b>{{totalItems}}</b> entries</i></div>
                         </div>
                         <div class="col-sm-6 text-right">
-                            <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="10" class="pagination" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                            <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="10" class="pagination-sm" boundary-links="true" rotate="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                                
                         </div>
                     </div>                      
                   

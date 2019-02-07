@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//require APPPATH . '/libraries/REST_Controller.php';
 class AuthCtrl extends CI_Controller {
 
 	
@@ -9,7 +9,8 @@ class AuthCtrl extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('auth/authModel');
+		$this->load->model('auth/authModel');
+		
        
         if ( "OPTIONS" === $_SERVER['REQUEST_METHOD'] ) {
             die();
@@ -47,8 +48,7 @@ class AuthCtrl extends CI_Controller {
 					$resp = array('error' => true,'status' => 'error', 'msg' => 'Email or Password is/are wrong.','data' => null);
 					jsonResp($resp);
 				}else{
-					$token = md5(uniqid(rand(), true)).md5(uniqid(rand(), true));
-					
+					$token = $this->genrate_token($doLogin->id);
 					$data_array = array(
 					    'm01_login_user_id' => $doLogin->id,
 					    'm01_login_token' => $token,
@@ -57,18 +57,21 @@ class AuthCtrl extends CI_Controller {
 					);
 					$this->db->insert('m01_user_login_details',$data_array);
 					$insertID = $this->db->insert_id();
-
-					
-					
-
 					$resp = array('error' => false,'status' => 'success', 'msg' => 'You have successfully logged in.','data' => $token);
 					jsonResp($resp);
 				}
-
 			}
 		}
 	}
 
+
+	public function genrate_token($id){
+        $tokenData = array();
+		$tokenData['id'] = $id; //TODO: Replace with data for token
+        $tokenData['timestamp'] = now();
+        $output['token'] = AUTHORIZATION::generateToken($tokenData);
+		return $output['token'];
+	}
 	public function loginUserDetails(){
 		// $json = file_get_contents('php://input');
 		// $post = json_decode($json)->fromData;
@@ -76,7 +79,7 @@ class AuthCtrl extends CI_Controller {
 		// $token = $post->token;
 
 		
-		$valid = $this->authModel->validateUser($this->token);
+		$valid = $this->authModel->validate_token();
 		if (!$valid) {
 			$resp = array('error' => true,'status' => 'invalid', 'msg' => 'You are not logged in','data' => '');
 			jsonResp($resp);

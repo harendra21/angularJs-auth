@@ -57,6 +57,23 @@ class AuthModel extends CI_Model {
 	    }
 	}
 
+
+	public function validate_token(){
+        $headers = $this->input->request_headers();
+        if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
+        	$token = substr($headers['Authorization'], 6);
+            $decodedToken = AUTHORIZATION::validateTimestamp($token);
+            
+            if ($decodedToken != false) {
+				//$this->set_response($decodedToken, REST_Controller::HTTP_OK);
+				//print_r(json_encode($decodedToken));
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 	public function getUserDetailByToken($token){
 		$user = $this->db->where('m01_login_token',$token)->get('m01_user_login_details')->row();
 		$loginUserID 	= $user->m01_login_user_id;

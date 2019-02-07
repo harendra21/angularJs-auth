@@ -1,5 +1,38 @@
 <div class="contaiber-fluid">
-    {{ userFullName }} <br>
-    {{ userRole }} <br>
-    {{ userLastLogin }} <br>
+    <div class="row">
+        <form name="editProfile">
+            <div class="col-md-3">
+                <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+                <div class="text-center">
+                    <img ng-src="api/uploads/user/{{ userDetails.image }}" alt="{{ userFullName }}" width="100">
+                </div>  
+                <input ng-show="!showDetails" type="file" class="form-control" onchange="angular.element(this).scope().uploadFile(this)">
+                <input type="hidden" ng-model="userDetails.image">
+                <hr>
+                <span ng-show="showDetails">{{ userFullName }}</span>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <input ng-show="!showDetails" type="text" ng-model="userDetails.fName" class="form-control">
+                    </div>
+                    <div class="col-xs-4">
+                        <input ng-show="!showDetails" type="text" ng-model="userDetails.mName" class="form-control">
+                    </div>
+                    <div class="col-xs-4">
+                        <input ng-show="!showDetails" type="text" ng-model="userDetails.lName" class="form-control">
+                    </div>
+                </div>
+                <hr>
+                <span>{{ userRole }}</span>
+                <hr>
+                <span>{{ userDetails.email }}</span>
+                <hr>
+                <span>{{ userDetails.lastLogin }}</span>
+                <hr>
+                <div class="text-right">
+                    <button ng-show="showDetails" class="btn btn-sm btn-primary" ng-click="editProfileFieldShow()"><span class="ion-edit"></span> Edit Profile</button>
+                    <button ng-show="!showDetails" type="submit" class="btn btn-sm btn-primary" ng-click="updateProfile(userDetails)"><span class="ion-paper-airplane"></span> Update Profile</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

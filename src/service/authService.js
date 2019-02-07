@@ -1,4 +1,4 @@
-app.service('authService',function($location,$rootScope,$http){
+app.service('authService', function ( $location, $rootScope, $http ){
     var that = this;
     this.isLoggedIn = function(){
         if(!sessionStorage.isLoggedIn && sessionStorage.isLoggedIn !== true ){
@@ -18,8 +18,9 @@ app.service('authService',function($location,$rootScope,$http){
                     method: "GET"
                 })
                 .then(function(response) {
-                    if(response.data.status == 'invalid'){
-                        that.isLoggedInRoute();
+                    //console.log(response.data.status);
+                    if(response.data.status === 'invalid'){
+                        that.logOut();
                     }else if(response.data.status == 'success'){
                         var user = response.data.data;
                         $rootScope.userDetails = user;
@@ -44,10 +45,10 @@ app.service('authService',function($location,$rootScope,$http){
         .then(function(response) {
             if(response.data){
 
-                if(response.data.error && response.data.status === 'error'){
+                if(response.data.error === true && response.data.status === 'error'){
                     scope.showAlert('error',response.data.msg);
                     scope.login.password = '';
-                }else if(!response.data.error && response.data.status === 'success'){
+                }else if(response.data.error === false && response.data.status === 'success'){
                     scope.showAlert('success',response.data.msg);
                     sessionStorage.isLoggedIn = true;
                     sessionStorage.loggedInToken = response.data.data;

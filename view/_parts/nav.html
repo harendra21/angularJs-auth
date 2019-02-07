@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
-        <button ng-if="isLoggedIn" type="button" class="navbar-btn ion-grid" ng-click="openAside('left', true)"> </button>
+        <a ng-if="isLoggedIn" type="button" class="sidebar-btn" aside-menu-toggle="sol2"> <span class="ion-navicon"></span> </a>
         <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>

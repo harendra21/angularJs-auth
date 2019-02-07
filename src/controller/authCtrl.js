@@ -19,5 +19,8 @@ app.controller('authCtrl',function($scope,authService){
             authService.login(email,password,$scope);
         }
             
-    }
+    };
+
+
+    
 });

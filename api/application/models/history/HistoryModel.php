@@ -22,6 +22,7 @@ class HistoryModel extends CI_Model {
 		$this->db->order_by('id','desc');
 		$this->db->limit($limit,$offset);
 		$data = $this->db->get('front_history');
+        //print_r($this->db->last_query());
 		if ($data->num_rows() > 0) {
 			return $data->result();
 		}else{
