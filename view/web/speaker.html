@@ -1,0 +1,147 @@
+<div class="container-fluid animated fadeInRight" data-ng-init="getSpeaker()">
+    <section id="main-content">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Add / Update Speaker</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+                        <div class="row">
+                            <form class="form-group" name="speakerForm">
+                                <div class="col-xs-6 form-group">
+                                    <input type="hidden" ng-model="speaker.staff_id">
+                                    <label>Speaker First Name : </label>
+                                    <input type="text" ng-model="speaker.staff_last_name" class="form-control" placeholder="First Name">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    
+                                    <label>Speaker Last Name : </label>
+                                    <input type="text" ng-model="speaker.staff_first_name" class="form-control" placeholder="Last Name">
+                                </div>
+
+                                <div class="col-xs-12 form-group">
+                                   
+                                    <label>Speaker Bio : </label>
+                                    <textarea ui-tinymce="tinymceOptions" ng-model="speaker.staff_bio" class="form-control"></textarea>
+                                </div>
+
+                                
+                                <div class="col-xs-12 form-group">
+                                    <label>Speaker Meta Title : </label>
+                                    <textarea ng-model="speaker.staff_page_title" class="form-control" placeholder="category meta title"></textarea>
+                                </div>
+                                <div class="col-xs-12 form-group">
+                                    <label>Speaker Meta Keywords : </label>
+                                    <textarea ng-model="speaker.staff_meta_keyword" class="form-control" placeholder="category meta keywords"></textarea>
+                                </div>
+                                <div class="col-xs-12 form-group">
+                                    <label>Speaker Meta Description : </label>
+                                    <textarea ng-model="speaker.staff_meta_description" class="form-control" placeholder="category meta description"></textarea>
+                                </div>
+                                <div class="col-xs-12 form-group">
+                                    <label>Status : </label>
+                                    <select ng-model="speaker.staff_status" class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="2">Inactive</option>
+                                        <option value="3">Deleted</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-xs-12 text-right form-group">
+                                    <button class="btn btn-danger btn-sm" ng-click="clearForm()"><span class="ion-ios7-loop-strong"></span> Reset Form</button>
+                                    <button ng-show="spakerAdd" class="btn btn-primary btn-sm" ng-click="addupdateCategory(cat)"><span class="ion-plus" ></span> Add</button>
+                                    <button ng-show="!spakerAdd" class="btn btn-success btn-sm" ng-click="addupdateCategory(cat)"><span class="ion-android-checkmark" ></span> Update</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Categories</h3>
+                  </div>
+                  <div class="panel-body">
+                    <!-- TOP OF TABLE: shows page size and search box -->
+                    <div class="form-inline">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div id="example_length">
+                                    <label>Records Perpage : </label>
+                                    <select name="example_length" aria-controls="example" class="form-control" ng-model="pageSize" ng-change="pageSizeChanged()">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <label>Speaker Name : <input type="search" class="form-control" aria-controls="example" ng-model="searchText" ng-blur="searchTextChanged()"></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        
+                        <!-- DATA TABLE: shows the results -->
+                        <!-- <table id="example" class="table table-striped table-bordered" datatable="" cellspacing="0" width="100%"> -->
+                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Bio</th>
+                                    <th>Status</th>
+                                    <th>Page Title</th>
+                                    <th>Page Keywords</th>
+                                    <th>Page Description</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-show="tblLoading">
+                                    <td colspan="10" class="text-center">
+                                        <span class="ion-refreshing tbl-loding"></span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="!tblLoading" ng-repeat = "speaker in results" >
+                                    <td class="text-center">{{ $index+1 }} <button class="btn btn-success btn-xs" ng-click="editSpeaker(speaker)"><span class="ion-edit"></span> Edit</button></td>
+                                    <td>{{ speaker.staff_first_name }} {{ speaker.staff_last_name }}</td>
+                                    <td>{{ speaker.staff_position }}</td>
+                                    <td>{{ speaker.staff_email }}</td>
+                                    <td>{{ speaker.staff_phone }}</td>
+                                    <td ng-bind-html="speaker.staff_bio | limitTo : 50 : 0"></td>
+                                    <td>{{ speaker.staff_status | capitalize }}</td>
+                                    <td>{{ speaker.staff_page_title | limitTo : 50 : 0 }}</td>
+                                    <td>{{ speaker.staff_meta_description | limitTo : 50 : 0 }}</td>
+                                    <td>{{ speaker.staff_meta_keyword | limitTo : 50 : 0 }}</td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- BOTTOM OF TABLE: shows record number and pagination control -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel-body" role="alert" aria-live="polite" aria-relevant="all"><i>Showing <b>{{startItem}}</b> to <b>{{endItem}}</b> of <b>{{totalItems}}</b> entries</i></div>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="10" class="pagination-sm" boundary-links="true"  boundary-link-numbers="true" rotate="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                                
+                        </div>
+                    </div>                      
+                  
+                  </div>
+                </div>
+            </div>
+        </div>
+     </section>
+</div>

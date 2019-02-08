@@ -34,12 +34,13 @@ app.controller('mainCtrl',function($scope,$rootScope,authService,$http){
 
 
     $scope.menus = [
-        { 'name' : 'Dashboard', 'url' : '#!/', 'icon' : 'ion-ionic', 'child' : '' },
+        { 'name' : 'Dashboard', 'url' : '#!/', 'icon' : 'ion-ios7-speedometer', 'child' : '' },
         { 'name' : 'History', 'url' : '','icon' : 'ion-calendar', 'child' : [
             { 'name' : 'Front History', 'url' : '#!/history/front-history' },
             { 'name' : 'Admin History', 'url' : '#!/history/admin-history' }
         ]},
-        { 'name' : 'Category','url' : '#!/category' , 'icon' : 'ion-ionic' ,'child' : ''}
+        { 'name' : 'Category','url' : '#!/category' , 'icon' : 'ion-ios7-photos' ,'child' : ''},
+        { 'name' : 'Speaker','url' : '#!/speaker' , 'icon' : 'ion-mic-b' ,'child' : ''}
     ];
 
     // $scope.asideState = {
@@ -82,4 +83,11 @@ app.controller('mainCtrl',function($scope,$rootScope,authService,$http){
         // hide loading gif
         $scope.tblLoading = false;
     });
+
+    $scope.tinymceOptions = {
+      plugins: 'link image code',
+      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code',
+      height: '200'
+    };
+
 });

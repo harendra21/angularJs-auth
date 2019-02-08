@@ -33,6 +33,8 @@ app.controller('categoryCtrl',['$scope','$rootScope','categoryService',function(
             $scope.showAlert('error','Please enter a valid category details');
         else if(!formData.category_name)
             $scope.showAlert('error','Please enter a valid category name');
+        else if(!formData.category_description)
+            $scope.showAlert('error','Please enter a valid category description');
         else if(!formData.category_page_title)
             $scope.showAlert('warning','Please enter a valid category page title');
         else if(!formData.category_meta_keyword)
@@ -40,11 +42,8 @@ app.controller('categoryCtrl',['$scope','$rootScope','categoryService',function(
         else if(!formData.category_meta_description)
             $scope.showAlert('warning','Please enter a valid category meta description');
         else{
-            if(formData.category_id){
-                categoryService.editCategory(formData,$scope);
-            }else{
-                categoryService.addCategory(formData,$scope);
-            }
+            categoryService.addeditCategory(formData,$scope);
+            $scope.clearForm();
         }
     }
 }]);

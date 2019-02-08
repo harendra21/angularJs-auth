@@ -31,6 +31,39 @@ class CategoryCtrl extends CI_Controller {
 		}
 	}
 
+	public function addeditCategory(){
+		$valid = $this->authModel->validate_token();
+		if (!$valid) {
+			$resp = array('error' => true,'status' => 'invalid', 'msg' => 'You are not logged in','data' => '');
+			jsonResp($resp);
+		}else{
+
+			$msg = '';
+
+			$json = file_get_contents('php://input');
+			$post = json_decode($json)->formData;
+			
+			
+
+			if(isset($post->category_id)){
+				$resp = $this->categoryModel->editCategory($post);
+				$msg = 'Category updated successfully';
+			}else{
+				$resp = $this->categoryModel->addCategory($post);
+				$msg = 'Category added successfully';
+			}
+			
+            if(!$resp){
+            	$resp = array('error' => true,'status' => 'error', 'msg' => 'Something went wrong. Please try again !','data' => '');
+				jsonResp($resp);
+            }else{
+            	$resp = array('error' => false,'status' => 'success', 'msg' => $msg,'data' => '');
+				jsonResp($resp);
+            }
+			
+		}
+	}
+
 }
 
 /* End of file categoryCtrl.php */

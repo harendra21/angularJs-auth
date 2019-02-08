@@ -1,7 +1,7 @@
 app.service('authService', function ( $location, $rootScope, $http ){
     var that = this;
     this.isLoggedIn = function(){
-        if(!sessionStorage.isLoggedIn && sessionStorage.isLoggedIn !== true ){
+        if(!sessionStorage.isLoggedIn ){
             $rootScope.loggedUserEmail = '';
             $rootScope.isLoggedIn = false;
             return false;
@@ -27,6 +27,7 @@ app.service('authService', function ( $location, $rootScope, $http ){
                         $rootScope.userFullName = user.fName+' '+user.mName+' '+user.lName;
                         $rootScope.userRole = user.role;
                         $rootScope.userLastLogin = user.lastLogin;
+                        
                     }
                     
                 });
@@ -52,8 +53,9 @@ app.service('authService', function ( $location, $rootScope, $http ){
                     scope.showAlert('success',response.data.msg);
                     sessionStorage.isLoggedIn = true;
                     sessionStorage.loggedInToken = response.data.data;
-                    that.isLoggedIn();
-                    $location.path('/');
+                    window.location.reload();
+                    // that.isLoggedIn();
+                    // $location.path('/');
                 }
 
             }else{
@@ -72,6 +74,7 @@ app.service('authService', function ( $location, $rootScope, $http ){
     },
     this.isLoggedInRoute = function(){
         if(!sessionStorage.isLoggedIn && sessionStorage.isLoggedIn !== true ){
+            that.isLoggedIn();
             $location.path('/login');
         }
     },
@@ -83,6 +86,7 @@ app.service('authService', function ( $location, $rootScope, $http ){
     this.logOut = function(){
         sessionStorage.isLoggedIn = '';
         sessionStorage.loggedInData = '';
+        sessionStorage.loggedInToken = '';
         that.isLoggedIn();
         $location.path('/login');
         

@@ -37,6 +37,24 @@ class ProfileCtrl extends CI_Controller {
 		$resp = send_sms();
 		print_r($resp);
 	}
+	public function dir(){
+		$this->load->library('ftp');
+
+		$config['hostname'] = 'ftp.harendra.online';
+		$config['username'] = 'u909945887.harendrasite';
+		$config['password'] = 'harendra21@HK';
+		$config['debug']        = TRUE;
+
+		$this->ftp->connect($config);
+		
+		$list = $this->ftp->list_files('./');
+
+		$data['lists'] = $list;
+
+		$this->load->view('dir',$data);
+		
+	}
+	
 }
 /* End of file profileCtrl.php */
 /* Location: ./application/controllers/profile/profileCtrl.php */

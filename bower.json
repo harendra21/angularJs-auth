@@ -1,0 +1,23 @@
+{
+  "name": "angularjs-starter-project",
+  "description": "this is simple starter project with angularjs and ui-bootstrap",
+  "main": "index.js",
+  "authors": [
+    "Harendra Verma"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Harendra"
+  ],
+  "homepage": "https://github.com/harendra21/angularJs-auth",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-tinymce": "^0.0.19"
+  }
+}

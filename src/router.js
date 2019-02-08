@@ -29,7 +29,22 @@ app.config(function($routeProvider,$controllerProvider) {
       controller : 'categoryCtrl',
       templateUrl : "view/web/category.html"
         
-    }).when("/my-profile", {
+    }).when("/speaker", {
+      resolve: {
+        lazy: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            files: ['src/controller/speakerCtrl.js']
+          }]);
+        }],
+        check : function(authService){
+          authService.isLoggedInRoute();
+        } 
+      },
+      controller : 'speakerCtrl',
+      templateUrl : "view/web/speaker.html"
+        
+    })
+    .when("/my-profile", {
       resolve: {
         lazy: ['$ocLazyLoad', function($ocLazyLoad) {
           return $ocLazyLoad.load([{

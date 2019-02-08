@@ -15,6 +15,14 @@
                                         <label>Category Name : </label>
                                         <input type="text" ng-model="cat.category_name" class="form-control" placeholder="category name">
                                     </div>
+
+                                    <div class="col-xs-12 form-group">
+                                        
+                                        <label>Category Description : </label>
+                                        <textarea ui-tinymce="tinymceOptions" ng-model="cat.category_description" class="form-control"></textarea>
+                                    </div>
+
+                                    
                                     <div class="col-xs-12 form-group">
                                         <label>Category Meta Title : </label>
                                         <textarea ng-model="cat.category_page_title" class="form-control" placeholder="category meta title"></textarea>
@@ -30,8 +38,9 @@
                                     <div class="col-xs-12 form-group">
                                         <label>Status : </label>
                                         <select ng-model="cat.category_status" class="form-control">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                            <option value="1">Active</option>
+                                            <option value="2">Inactive</option>
+                                            <option value="3">Deleted</option>
                                         </select>
                                     </div>
                                     
@@ -81,6 +90,7 @@
                                     <tr>
                                         <th>S. No.</th>
                                         <th>Name</th>
+                                        <th>Description</th>
                                         <th>Status</th>
                                         <th>Meta Title</th>
                                         <th>Meta Keyword</th>
@@ -97,6 +107,7 @@
                                     <tr ng-show="!tblLoading" ng-repeat = "cat in results" >
                                         <td class="text-center">{{ $index+1 }} <button class="btn btn-success btn-xs" ng-click="editCategory(cat)"><span class="ion-edit"></span> Edit</button></td>
                                         <td>{{ cat.category_name }}</td>
+                                        <td ng-bind-html="cat.category_description | limitTo : 50 : 0"></td>
                                         <td>{{ cat.category_status | capitalize }}</td>
                                         <td>{{ cat.category_page_title | limitTo : 50 : 0 }}</td>
                                         <td>{{ cat.category_meta_keyword | limitTo : 50 : 0 }}</td>

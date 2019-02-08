@@ -18,10 +18,25 @@ app.service('categoryService',function($location,$rootScope,$http){
             }
         });
     },
-    this.editCategory = function(data,scope){
-        console.log('Edit');
-    },
-    this.addCategory = function(data,scope){
-        console.log('Add');
+    this.addeditCategory = function(data,scope){
+        
+
+        $http({
+            url: baseUrl+'category/addeditCategory',
+            method: "POST",
+            data: { 'formData' : data }
+        })
+        .then(function(response) {
+            if(response.data.status === 'invalid'){
+                that.logOut();
+            }else if(response.data.status === 'error'){
+                scope.showAlert('error',response.data.msg);
+            }else if(response.data.status === 'success'){
+                scope.getCategory();
+                scope.showAlert('success',response.data.msg);
+            }
+        });
+
     }
+   
 });

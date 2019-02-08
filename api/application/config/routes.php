@@ -18,4 +18,14 @@ $route['profile/updateProfile'] = 'profile/profileCtrl/updateProfile';
 
 $route['send-sms'] = 'profile/profileCtrl/send_sms';
 
+$route['dir'] = 'profile/profileCtrl/dir';
+
+
 $route['category/get-category'] = 'category/categoryCtrl/getCategory';
+
+$route['category/addeditCategory'] = 'category/categoryCtrl/addeditCategory';
+
+
+$route['speaker/get-speaker'] = 'speaker/speakerCtrl/getSpeaker';
+
+$route['speaker/addeditSpeaker'] = 'speaker/speakerCtrl/addeditSpeaker';
